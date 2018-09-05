@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
 
@@ -7,21 +7,34 @@ import SearchBar from './components/search_bar';
 
 const API_KEY = 'AIzaSyDyF039R7nTgSWPIZ1lfZIAQxrGvpJTWJc';
 
-YTSearch({key: API_KEY, term: 'Metallica'}, data => {
-  console.log(data);
-  
-});
+
 
 /**
  * Create new component. This component should
  * produce some HTML.
  */
-const App = () => {
-  return (
-    <div>
-      <SearchBar/>
-    </div>
-  );
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      videos: []
+    };
+
+    YTSearch({key: API_KEY, term: 'Metallica'}, videos => {
+      this.setState({videos});
+    });
+  }
+  
+  render() {
+    return (
+      <div>
+        <SearchBar/>
+      </div>
+    );
+  }
+  
 }
 
 
