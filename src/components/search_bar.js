@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { timingSafeEqual } from 'crypto';
 
 export default class SearchBar extends Component {
 
@@ -10,12 +11,11 @@ export default class SearchBar extends Component {
         }
     }
 
-    onInputChange(event) {
-        console.log(event.target.value);
-        
-    }
-
     render() {
-        return <input onChange={this.onInputChange} />;
+        return (
+            <div>
+                <input onChange={event => this.setState({term: event.target.value})} />                
+            </div>
+        );
     }
 }
